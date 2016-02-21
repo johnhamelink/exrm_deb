@@ -45,7 +45,7 @@ end
 
 ## Usage
 
-You can build a db at the same time as building a release by adding the --deb option to release.
+You can build a deb at the same time as building a release by adding the --deb option to release.
 
 ```bash
 mix release --deb
