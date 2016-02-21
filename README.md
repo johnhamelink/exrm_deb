@@ -25,24 +25,22 @@ defmodule Testapp.Mixfile do
 
 The `package` function must be set as per the [hex guidelines][2], but with some extra lines:
 
-```diff
-+  def package do
-+    [
-+      external_dependencies: [],
-+      license_file: "LICENSE",
-+      files: [ "lib", "mix.exs", "README*", "LICENSE"],
-+      maintainers: ["John Hamelink <john@example.com>"],
-+      licenses: ["MIT"],
-+      vendor: "John Hamelink",
-+      links:  %{
-+        "GitHub" => "https://github.com/johnhamelink/testapp",
-+        "Docs" => "hexdocs.pm/testapp",
-+        "Homepage" => "https://github.com/johnhamelink/testapp"
-+      }
-+    ]
-+  end
-+
- end
+```elixir
+def package do
+   [
+      external_dependencies: [],
+      license_file: "LICENSE",
+      files: [ "lib", "mix.exs", "README*", "LICENSE"],
+      maintainers: ["John Hamelink <john@example.com>"],
+      licenses: ["MIT"],
+      vendor: "John Hamelink",
+      links:  %{
+        "GitHub" => "https://github.com/johnhamelink/testapp",
+        "Docs" => "hexdocs.pm/testapp",
+        "Homepage" => "https://github.com/johnhamelink/testapp"
+      }
+   ]
+end
 ```
 
 ## Usage
