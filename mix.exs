@@ -8,15 +8,25 @@ defmodule ExrmDeb.Mixfile do
      description: "Create a deb for your elixir release with ease",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps,
+     deps: deps(Mix.env),
      package: package]
   end
 
-  def application do
-    [applications: [:logger, :exrm, :timex]]
+  def application, do: [applications: apps(Mix.env)]
+
+  defp apps(:test) do
+    apps(:all) ++ [:faker]
   end
 
-  defp deps do
+  defp apps(_) do
+    [:logger, :exrm, :timex]
+  end
+
+  defp deps(:test) do
+    deps(:all) ++ [ {:faker, "~> 0.6"} ]
+  end
+
+  defp deps(_) do
     [
      {:exrm, "~> 1.0"},
      {:timex, "~> 1.0.1"}
