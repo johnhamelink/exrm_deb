@@ -35,8 +35,15 @@ defmodule ExrmDeb.Mixfile do
 
   def package do
     [
+      maintainer_scripts: [
+        pre_install: "config/deb/pre_install.sh"
+      ],
       external_dependencies: [],
       license_file: "LICENSE",
+      maintainer_scripts: [
+        pre_install: "config/preinst.sh",
+        post_install: "config/postinst.sh"
+      ],
       files: [ "lib", "mix.exs", "README*", "LICENSE"],
       maintainers: ["John Hamelink <john@johnhamelink.com>"],
       licenses: ["MIT"],
