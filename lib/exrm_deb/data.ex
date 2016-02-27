@@ -6,7 +6,6 @@ defmodule ExrmDeb.Data do
 
     # TODO:
     # - Add init script
-    # - Add ability to create pre-inst / post-inst hooks
     # - Add ability to add conform config as a config file (how?).
 
     data_dir = make_data_dir(dir, config)
