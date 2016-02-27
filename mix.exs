@@ -18,12 +18,7 @@ defmodule ExrmDeb.Mixfile do
 
   defp deps do
     [
-     {:cf, "~> 0.2.1", override: true},   # remove this later (exrm acting up on elixir 1.2.1)
-     {:erlware_commons,
-       github: "erlware/erlware_commons",
-       override: true},                   # remove this later (exrm acting up on elixir 1.2.1)
-     {:exrm, github: "bitwalker/exrm",
-       branch: "master", override: true}, # For making releases
+     {:exrm, "~> 1.0"},
      {:timex, "~> 1.0.1"}
     ]
   end
