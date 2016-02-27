@@ -1,11 +1,11 @@
 defmodule ExrmDeb.Control do
-  alias  ReleaseManager.Utils.Logger
+  alias ReleaseManager.Utils.Logger
   import Logger, only: [debug: 1]
 
   def build(deb_root, config) do
     control_dir = Path.join([deb_root, "control"])
 
-    debug("Building debian control directory")
+    debug "Building debian control directory"
     :ok = File.mkdir_p(control_dir)
 
     build_control_file(config, control_dir)
