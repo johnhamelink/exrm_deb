@@ -74,7 +74,7 @@ defmodule ExrmDeb.Utils do
       licenses:              Enum.join((mix_config[:package][:licenses] || []), ", "),
       maintainers:           Enum.join(mix_config[:package][:maintainers], ", "),
       external_dependencies: Enum.join((mix_config[:package][:external_dependencies] || []), ", "),
-      maintainer_scripts:    mix_config[:package][:maintainer_scripts],
+      maintainer_scripts:    (mix_config[:package][:maintainer_scripts] || []),
       homepage:              Map.fetch!(mix_config[:package][:links], "Homepage"),
       description:           mix_config[:description],
       vendor:                mix_config[:package][:vendor],

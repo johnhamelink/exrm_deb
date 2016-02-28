@@ -16,10 +16,13 @@ defmodule ExrmDebTest do
       installed_size:        9999,
       external_dependencies: ["firefox"],
       homepage:              Faker.Internet.url,
-      description:           Faker.Lorem.paragraph(1..5)
+      description:           Faker.Lorem.paragraph(1..5),
+      maintainer_scripts:    []
     }
     |> ExrmDeb.Utils.sanitize_config
 
+    # Required to stop Logger.debug from returning
+    # GenServer errors.
     ReleaseManager.Utils.Logger.start_link
 
     :ok = File.cd(test_dir)

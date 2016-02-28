@@ -20,7 +20,7 @@ defmodule ExrmDeb.Control do
   defp add_custom_hooks(config, control_dir) do
     debug "Adding in custom hooks"
     for {type, path} <- config.maintainer_scripts do
-      script = 
+      script =
         [File.cwd!, path]
         |> Path.join
 
