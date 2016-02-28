@@ -69,7 +69,7 @@ A list of configuration options you can add to `package/0`:
 
  - `licenses`
    - Array of strings
-   - Can be something like ["Copyright <date> <company_name>"] if you are building private packages.
+   - Can be something like `["Copyright <date> <company_name>"]` if you are building private packages.
  - `maintainers`
    - Array of Strings
    - Should be in the format `name <email>`
