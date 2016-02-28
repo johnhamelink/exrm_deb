@@ -12,7 +12,11 @@ respawn
 env MIX_ENV=prod
 export MIX_ENV
 
+<%= if uid == "root" do %>
+env HOME=/root
+<% else %>
 env HOME=/home/<%= uid %>
+<% end %>
 export HOME
 
 pre-start exec /bin/sh /opt/<%= name %>/bin/<%= name %> start
