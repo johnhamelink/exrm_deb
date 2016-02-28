@@ -96,10 +96,7 @@ defmodule ExrmDeb.Utils do
   end
 
   def project_dir do
-      [
-        Application.app_dir(:exrm_deb),
-        "..", "..", "..", "..",
-      ] |> Path.join
+    Application.get_env(:exrm_deb, :root)
   end
 
 end

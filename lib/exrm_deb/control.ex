@@ -46,23 +46,24 @@ defmodule ExrmDeb.Control do
   defp build_control_file(config, control_dir) do
     debug "Building Control file"
 
-    out = """
-    Package: #{config.sanitized_name}
-    Version: #{config.version}
-    License: #{config.licenses}
-    Vendor: #{config.vendor}
-    Architecture: #{config.arch}
-    Maintainer: #{config.maintainers}
-    Installed-Size: #{config.installed_size}
-    Depends: #{config.external_dependencies}
-    Priority: extra
-    Section: misc
-    Homepage: #{config.homepage}
-    Description: #{config.description}
-      #{config.version}
-     .
-      Automatically packaged by exrm_deb
-    """
+    out =
+      [
+        ExrmDeb.Utils.project_dir,
+        "templates", "control.eex"
+      ]
+      |> Path.join
+      |> EEx.eval_file([
+        description: config.description,
+        sanitized_name: config.sanitized_name,
+        version: config.version,
+        licenses: config.licenses,
+        vendor: config.vendor,
+        arch: config.arch,
+        maintainers: config.maintainers,
+        installed_size: config.installed_size,
+        external_dependencies: config.external_dependencies,
+        homepage: config.homepage
+      ])
 
     :ok = File.write(Path.join([control_dir, "control"]), out)
 
