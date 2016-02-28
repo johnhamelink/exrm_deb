@@ -3,16 +3,12 @@ defmodule ExrmDeb.Data do
   import Logger, only: [debug: 1]
 
   def build(dir, config) do
-
-    # TODO:
-    # - Add init script
-    # - Add ability to add conform config as a config file (how?).
-
     data_dir = make_data_dir(dir, config)
     copy_release(data_dir, config)
     remove_targz_file(data_dir, config)
     remove_fs_metadata(data_dir)
     add_changelog(data_dir, config)
+    add_init_scripts(data_dir, config)
 
     config = Map.put_new(
       config,
@@ -71,6 +67,38 @@ defmodule ExrmDeb.Data do
     {:ok, _} = File.cp_r(src, dest)
 
     dest
+  end
+
+  defp add_init_scripts(data_dir, config) do
+    # TODO: Add systemd script
+    # TODO: Add init script
+
+    # Add upstart script
+    upstart_script =
+      [
+        ExrmDeb.Utils.project_dir,
+        "templates", "init_scripts", "upstart.conf.eex"
+      ]
+      |> Path.join
+      |> EEx.eval_file(
+        [
+          description: config.description,
+          name: config.name,
+          uid: config.owner[:user],
+          gid: config.owner[:group]
+        ]
+      )
+
+    out_dir =
+      [data_dir, "etc", "init"]
+      |> Path.join
+
+    :ok = File.mkdir_p(out_dir)
+
+    :ok =
+      [out_dir, config.sanitized_name <> ".conf"]
+      |> Path.join
+      |> File.write(upstart_script)
   end
 
   defp add_changelog(data_dir, config) do
