@@ -49,10 +49,9 @@ defmodule ExrmDeb.Data do
   # We don't use/need the .tar.gz file built be exrm, so
   # remove it from the data dir to reduce filesize.
   defp remove_targz_file(data_dir, config) do
-    :ok =
-      [data_dir, "opt", config.name, "#{config.name}-#{config.version}.tar.gz"]
-      |> Path.join
-      |> File.rm
+    [data_dir, "opt", config.name, "#{config.name}-#{config.version}.tar.gz"]
+    |> Path.join
+    |> File.rm
   end
 
   defp make_data_dir(dir, config) do
