@@ -2,6 +2,20 @@
 
 Adds simple [Debian Package][1] (DEB) generation to the exrm package manager.
 
+## Functionality list
+
+ 1. [x] Able to build debian packages:
+     1. [x] With changelog
+     2. [x] With control file
+ 2. [x] Ability to add in pre/post install/remove scripts
+ 3. [ ] Automatically builds init scripts:
+     1. [x] Upstart
+     2. [ ] Systemd
+     3. [ ] SysV
+ 4. [ ] Add ability for you to replace file templates with your own
+ 5. [ ] Handle functionality for Hot Upgrades
+ 6. [ ] Merge debian to-be-deployed files with your own structure
+
 ## External dependencies
 
 Before using exrm-deb, you'll need the following commands installed and in your path:
