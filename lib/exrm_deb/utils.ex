@@ -75,6 +75,7 @@ defmodule ExrmDeb.Utils do
       maintainers:           Enum.join(mix_config[:package][:maintainers], ", "),
       external_dependencies: Enum.join((mix_config[:package][:external_dependencies] || []), ", "),
       maintainer_scripts:    (mix_config[:package][:maintainer_scripts] || []),
+      init_scripts:          [],
       homepage:              Map.fetch!(mix_config[:package][:links], "Homepage"),
       description:           mix_config[:description],
       vendor:                mix_config[:package][:vendor],
@@ -92,6 +93,13 @@ defmodule ExrmDeb.Utils do
       |> String.replace(~r([^a-z\-\+\.]), "")
 
     Map.put(config, :sanitized_name, sanitized_name)
+  end
+
+  def project_dir do
+      [
+        Application.app_dir(:exrm_deb),
+        "..", "..", "..", "..",
+      ] |> Path.join
   end
 
 end
