@@ -65,6 +65,30 @@ def package do
 end
 ```
 
+A list of configuration options you can add to `package/0`:
+
+ - `licenses`
+   - Array of strings
+   - Can be something like ["Copyright <date> <company_name>"] if you are building private packages.
+ - `maintainers`
+   - Array of Strings
+   - Should be in the format `name <email>`
+ - `external_dependencies`
+   - Array of Strings
+   - Should be in the format of `package-name (operator version_number)` where operator is either `<<`, `<=`, `=`, `>=`, or `>>` - [read more about this here.][4]
+ - `maintainer_scripts`
+   - A keyword list of Strings
+   - The keyword should be one of: `:pre_install`, `:post_install`, `:pre_uninstall`, or `:post_uninstall`
+   - The keyword should point to the path of a script you want to run at the moment in question.
+ - `vendor`
+   - String
+   - The distribution vendor that's creating the debian package. I normally just put my name or company name.
+ - `owner`
+   - A keyword list of Strings
+   - If set, requires both `user` and `group` keys to be set.
+   - This is used when building the archive to set the correct user and group
+   - Defaults to root for user & group.
+
 ## Usage
 
 You can build a deb at the same time as building a release by adding the --deb option to release.
@@ -101,3 +125,4 @@ The package can be installed as:
 [1]:https://en.wikipedia.org/wiki/Deb_(file_format)
 [2]:https://hex.pm/docs/publish
 [3]:https://github.com/bitwalker/exrm
+[4]:https://www.debian.org/doc/manuals/maint-guide/dreq.en.html#control
