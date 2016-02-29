@@ -10,7 +10,7 @@ Adds simple [Debian Package][1] (DEB) generation to the exrm package manager.
  2. [x] Ability to add in pre/post install/remove scripts
  3. [ ] Automatically builds init scripts:
      1. [x] Upstart
-     2. [ ] Systemd
+     2. [x] Systemd
      3. [ ] SysV
  4. [ ] Add ability for you to replace file templates with your own
  5. [ ] Handle functionality for Hot Upgrades
