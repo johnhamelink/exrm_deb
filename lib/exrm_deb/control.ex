@@ -9,10 +9,13 @@ defmodule ExrmDeb.Control do
     debug "Building debian control directory"
     :ok = File.mkdir_p(control_dir)
 
-    build_control_file(config, control_dir)
+    ExrmDeb.Generators.Control.build(config, control_dir)
     add_custom_hooks(config, control_dir)
-    ExrmDeb.Utils.compress(control_dir, Path.join([control_dir, "..", "control.tar.gz"]))
-    ExrmDeb.Utils.remove_tmp(control_dir)
+    ExrmDeb.Utils.Compression.compress(
+      control_dir,
+      Path.join([control_dir, "..", "control.tar.gz"])
+    )
+    ExrmDeb.Utils.File.remove_tmp(control_dir)
 
     :ok
   end
@@ -41,32 +44,5 @@ defmodule ExrmDeb.Control do
       debug "Copying #{Atom.to_string(type)} file to #{filename}"
       File.cp(script, filename)
     end
-  end
-
-  defp build_control_file(config, control_dir) do
-    debug "Building Control file"
-
-    out =
-      [
-        ExrmDeb.Utils.project_dir,
-        "templates", "control.eex"
-      ]
-      |> Path.join
-      |> EEx.eval_file([
-        description: config.description,
-        sanitized_name: config.sanitized_name,
-        version: config.version,
-        licenses: config.licenses,
-        vendor: config.vendor,
-        arch: config.arch,
-        maintainers: config.maintainers,
-        installed_size: config.installed_size,
-        external_dependencies: config.external_dependencies,
-        homepage: config.homepage
-      ])
-
-    :ok = File.write(Path.join([control_dir, "control"]), out)
-
-    config
   end
 end

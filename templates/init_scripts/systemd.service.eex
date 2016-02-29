@@ -1,0 +1,21 @@
+[Unit]
+Description=<%= description %>
+After=network.target
+
+[Service]
+Type=forking
+TimeoutSec=120
+User=<%= uid %>
+Group=<%= gid %>
+
+<%= if uid == "root" do %>
+Environment=HOME=/root
+<% else %>
+Environment=HOME=/home/<%= uid %>
+<% end %>
+
+ExecStart= /opt/<%= name %>/bin/<%= name %> start
+ExecStop= /opt/<%= name %>/bin/<%= name %> stop
+
+[Install]
+WantedBy=multi-user.target

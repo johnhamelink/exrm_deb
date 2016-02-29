@@ -1,59 +1,10 @@
-defmodule ExrmDeb.Utils do
+defmodule ExrmDeb.Utils.Config do
   alias  ReleaseManager.Utils.Logger
   import Logger, only: [debug: 1]
 
   @doc """
-  Retrieves all the files within a directory, retrieves the size of all these
-  files, then adds them all together.
+  Use uname to detect the architecture we're currently building for
   """
-  def get_dir_size(dir) do
-    {_parts, size} =
-      [dir, "**"]
-      |> Path.join
-      |> Path.wildcard
-      |> Enum.map_reduce(0, fn(file, acc) ->
-        size = File.stat!(file).size
-        {size, size + acc}
-      end)
-    size
-  end
-
-  def tar_cmd do
-    case :os.type do
-      {:unix, :darwin} -> "gtar"
-      _ -> "tar"
-    end
-  end
-
-  def compress(dir, outfile, opts \\ []) do
-    debug "Compressing #{dir} -> #{outfile}"
-
-    opts =
-      opts
-      |> Enum.flat_map(fn(option) ->
-        case option do
-          {:owner, value} -> ["--owner", value[:user], "--group", value[:group]]
-          {key, value} -> ["--#{Atom.to_string(key)}", value]
-          _ -> [option]
-        end
-      end)
-
-    cmd_opts = opts ++ ["-acf", outfile, "."]
-
-    {_ignore, 0} = System.cmd(
-      tar_cmd,
-      cmd_opts,
-      cd: dir,
-      stderr_to_stdout: true,
-      env: [{"GZIP", "-9"}]
-    )
-  end
-
-  def remove_tmp(dir) do
-    debug "Removing #{dir}"
-    {:ok, _files} = File.rm_rf(dir)
-  end
-
   def detect_arch do
     {arch, 0} = System.cmd("uname", ["-m"])
     arch = String.replace(arch, "\n", "")
@@ -64,6 +15,10 @@ defmodule ExrmDeb.Utils do
     end
   end
 
+  @doc """
+  Produce a config map which is used throughout
+  ExrmDeb.
+  """
   def build_config(config = %{}) do
     mix_config = Mix.Project.config
 
@@ -86,6 +41,9 @@ defmodule ExrmDeb.Utils do
     |> sanitize_config
   end
 
+  @doc """
+  Sanitize certain elements so that they are (for example) filesystem safe.
+  """
   def sanitize_config(config = %{}) do
     sanitized_name =
       config.name
@@ -95,8 +53,11 @@ defmodule ExrmDeb.Utils do
     Map.put(config, :sanitized_name, sanitized_name)
   end
 
+  @doc """
+  Retrieve the Application root, which is used when referring to relative files
+  in the library (such as templates)
+  """
   def project_dir do
     Application.get_env(:exrm_deb, :root)
   end
-
 end
