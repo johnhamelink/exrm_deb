@@ -21,7 +21,7 @@ defmodule ExrmDeb.Mixfile do
   end
 
   defp apps(_) do
-    [:logger, :exrm, :timex]
+    [:logger, :exrm, :timex, :vex]
   end
 
   defp deps(:test) do
@@ -34,7 +34,8 @@ defmodule ExrmDeb.Mixfile do
   defp deps(_) do
     [
      {:exrm, "~> 1.0"},
-     {:timex, "~> 1.0.1"}
+     {:timex, "~> 1.0.1"},
+     {:vex, "~> 0.5.5"}
     ]
   end
 
@@ -45,10 +46,6 @@ defmodule ExrmDeb.Mixfile do
       ],
       external_dependencies: [],
       license_file: "LICENSE",
-      maintainer_scripts: [
-        pre_install: "config/preinst.sh",
-        post_install: "config/postinst.sh"
-      ],
       files: [ "lib", "mix.exs", "README*", "LICENSE"],
       maintainers: ["John Hamelink <john@johnhamelink.com>"],
       licenses: ["MIT"],
