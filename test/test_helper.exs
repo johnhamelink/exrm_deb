@@ -27,7 +27,7 @@ defmodule TestHelper do
       description:           Faker.Lorem.paragraph(1..5),
       maintainer_scripts:    [],
       owner:                 [user: "root", group: "root"]
-    } |> ExrmDeb.Utils.sanitize_config
+    } |> ExrmDeb.Utils.Config.sanitize_config
   end
 
 end

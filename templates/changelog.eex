@@ -1,0 +1,5 @@
+<%= sanitized_name %> (<%= version %>) whatever; urgency=medium
+
+  * Package created by exrm_deb
+
+ -- <%= maintainers %> <%= time %>

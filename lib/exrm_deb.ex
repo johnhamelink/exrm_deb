@@ -6,7 +6,7 @@ defmodule ReleaseManager.Plugin.Deb do
   def before_release(_), do: nil
 
   def after_release(%{deb: true} = config) do
-    config = ExrmDeb.Utils.build_config(config)
+    config = ExrmDeb.Utils.Config.build_config(config)
 
     remove_deb_dir
     deb_root = initialize_dir
