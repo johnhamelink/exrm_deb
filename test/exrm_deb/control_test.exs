@@ -7,6 +7,8 @@ defmodule ExrmDebTest.ControlTest do
       |> Path.join
       |> TestHelper.tmp_directory
 
+    File.cd(test_dir)
+
     on_exit fn ->
       :ok =
         [test_dir, ".."]

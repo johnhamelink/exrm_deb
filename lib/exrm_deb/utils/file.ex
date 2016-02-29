@@ -23,9 +23,12 @@ defmodule ExrmDeb.Utils.File do
   """
   def remove_fs_metadata(data_dir) do
     debug "Removing Filesystem metadata"
-    Path.join([data_dir, "**"])
-    |> ExrmDeb.Utils.File.remove_all_files_by_name(".DS_Store")
-    |> ExrmDeb.Utils.File.remove_all_files_by_name("thumbs.db")
+    [data_dir, Path.join([data_dir, "**"])]
+    |> Enum.each(fn(path) ->
+      path
+        |> ExrmDeb.Utils.File.remove_all_files_by_name(".DS_Store")
+        |> ExrmDeb.Utils.File.remove_all_files_by_name("thumbs.db")
+    end)
   end
 
   @doc """
