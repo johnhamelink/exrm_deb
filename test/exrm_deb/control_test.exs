@@ -2,30 +2,10 @@ defmodule ExrmDebTest.ControlTest do
   use ExUnit.Case
 
   setup do
-    test_dir = Path.join([File.cwd!, "test", "tmp_control"])
-    {:ok, _} = File.rm_rf(test_dir)
-    :ok = File.mkdir_p(test_dir)
-
-    metadata = %{
-      name:                  Faker.App.name,
-      version:               Faker.App.version,
-      licenses:              ["MIT", "GPL2"],
-      vendor:                Faker.Company.name,
-      arch:                  "amd64",
-      maintainers:           ["#{Faker.Name.name} <#{Faker.Internet.email}>"],
-      installed_size:        9999,
-      external_dependencies: ["firefox"],
-      homepage:              Faker.Internet.url,
-      description:           Faker.Lorem.paragraph(1..5),
-      maintainer_scripts:    []
-    }
-    |> ExrmDeb.Utils.sanitize_config
-
-    # Required to stop Logger.debug from returning
-    # GenServer errors.
-    ReleaseManager.Utils.Logger.start_link
-
-    :ok = File.cd(test_dir)
+    {:ok, test_dir} =
+      [File.cwd!, "test", "tmp_control"]
+      |> Path.join
+      |> TestHelper.tmp_directory
 
     on_exit fn ->
       :ok =
@@ -39,7 +19,7 @@ defmodule ExrmDebTest.ControlTest do
 
     {:ok, config: %{
         test_dir: test_dir,
-        metadata: metadata
+        metadata: TestHelper.metadata
     }}
   end
 
