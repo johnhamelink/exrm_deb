@@ -9,7 +9,6 @@ defmodule TestHelper do
   def tmp_directory(path) do
     {:ok, _} = File.rm_rf(path)
     :ok = File.mkdir_p(path)
-    :ok = File.cd(path)
     {:ok, path}
   end
 
