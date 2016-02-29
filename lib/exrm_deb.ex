@@ -6,8 +6,20 @@ defmodule ReleaseManager.Plugin.Deb do
   def before_release(_), do: nil
 
   def after_release(%{deb: true} = config) do
-    config = ExrmDeb.Utils.Config.build_config(config)
+    case ExrmDeb.Config.build_config do
+      {:ok, config} -> start_build(config)
+      _             -> nil
+    end
+  end
 
+  def after_release(_), do: nil
+  def after_package(_), do: nil
+
+  def after_cleanup(_args) do
+    remove_deb_dir
+  end
+
+  defp start_build(config) do
     remove_deb_dir
     deb_root = initialize_dir
 
@@ -16,13 +28,6 @@ defmodule ReleaseManager.Plugin.Deb do
     :ok = Deb.build(deb_root, config)
 
     info("A debian package has successfully been created. You can find it in the ./rel directory")
-  end
-
-  def after_release(_), do: nil
-  def after_package(_), do: nil
-
-  def after_cleanup(_args) do
-    remove_deb_dir
   end
 
   defp remove_deb_dir do

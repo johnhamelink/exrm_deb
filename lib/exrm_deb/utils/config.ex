@@ -1,6 +1,4 @@
 defmodule ExrmDeb.Utils.Config do
-  alias  ReleaseManager.Utils.Logger
-  import Logger, only: [debug: 1]
 
   @doc """
   Use uname to detect the architecture we're currently building for
@@ -13,32 +11,6 @@ defmodule ExrmDeb.Utils.Config do
       "noarch" -> "all"
       _ -> arch
     end
-  end
-
-  @doc """
-  Produce a config map which is used throughout
-  ExrmDeb.
-  """
-  def build_config(config = %{}) do
-    mix_config = Mix.Project.config
-
-    # TODO: Remove defaults & add
-    # config checker before doing anything.
-
-    %{
-      licenses:              Enum.join((mix_config[:package][:licenses] || []), ", "),
-      maintainers:           Enum.join(mix_config[:package][:maintainers], ", "),
-      external_dependencies: Enum.join((mix_config[:package][:external_dependencies] || []), ", "),
-      maintainer_scripts:    (mix_config[:package][:maintainer_scripts] || []),
-      init_scripts:          [],
-      homepage:              Map.fetch!(mix_config[:package][:links], "Homepage"),
-      description:           mix_config[:description],
-      vendor:                mix_config[:package][:vendor],
-      arch:                  detect_arch,
-      owner:                 (mix_config[:package][:owner] || [user: "root", group: "root"])
-    }
-    |> Map.merge(config)
-    |> sanitize_config
   end
 
   @doc """
