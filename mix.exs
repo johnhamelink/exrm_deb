@@ -9,6 +9,8 @@ defmodule ExrmDeb.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps(Mix.env),
+     test_coverage: [tool: ExCoveralls],
+     preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test],
      package: package]
   end
 
@@ -23,7 +25,10 @@ defmodule ExrmDeb.Mixfile do
   end
 
   defp deps(:test) do
-    deps(:all) ++ [ {:faker, "~> 0.6"} ]
+    deps(:all) ++ [
+      {:faker, "~> 0.6"},
+      {:excoveralls, "~> 0.4"}
+    ]
   end
 
   defp deps(_) do
