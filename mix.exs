@@ -52,7 +52,7 @@ defmodule ExrmDeb.Mixfile do
       vendor: "John Hamelink",
       links:  %{
         "GitHub" => "https://github.com/johnhamelink/exrm_deb",
-        "Docs" => "hexdocs.pm/exrm_deb",
+        "Docs" => "https://hexdocs.pm/exrm_deb",
         "Homepage" => "https://github.com/johnhamelink/exrm_deb"
       }
     ]
