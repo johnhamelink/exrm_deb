@@ -27,7 +27,8 @@ defmodule ExrmDeb.Mixfile do
   defp deps(:test) do
     deps(:all) ++ [
       {:faker, "~> 0.6"},
-      {:excoveralls, "~> 0.4"}
+      {:excoveralls, "~> 0.4"},
+      {:inch_ex, "~> 0.5"}
     ]
   end
 

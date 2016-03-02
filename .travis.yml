@@ -8,4 +8,6 @@ env:
 
 script:
   - mix test
+after_script:
   - mix coveralls.travis
+  - mix inch.report
