@@ -31,6 +31,13 @@ defmodule ExrmDeb.Mixfile do
     ]
   end
 
+  defp deps(:dev) do
+    deps(:all) ++ [
+      {:ex_doc, "~> 0.11"},
+      {:earmark, "~> 0.2"}
+    ]
+  end
+
   defp deps(_) do
     [
      {:exrm, "~> 1.0"},
