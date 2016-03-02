@@ -1,6 +1,9 @@
 # Elixir Release Manager DEB generator
 
-[![Coverage Status](https://coveralls.io/repos/github/johnhamelink/exrm-deb/badge.svg?branch=master)](https://coveralls.io/github/johnhamelink/exrm-deb?branch=master) [![Build Status](https://travis-ci.org/johnhamelink/exrm-deb.svg?branch=master)](https://travis-ci.org/johnhamelink/exrm-deb) [![Hex version](https://img.shields.io/hexpm/v/exrm_deb.svg "Hex version")](https://hex.pm/packages/exrm_deb)
+[![Coverage Status](https://coveralls.io/repos/github/johnhamelink/exrm-deb/badge.svg?branch=master)](https://coveralls.io/github/johnhamelink/exrm-deb?branch=master)
+[![Build Status](https://travis-ci.org/johnhamelink/exrm-deb.svg?branch=master)](https://travis-ci.org/johnhamelink/exrm-deb)
+[![Hex version](https://img.shields.io/hexpm/v/exrm_deb.svg "Hex version")](https://hex.pm/packages/exrm_deb)
+[![Inline docs](http://inch-ci.org/github/johnhamelink/exrm_deb.svg)](http://inch-ci.org/github/johnhamelink/exrm_deb)
 
 Adds simple [Debian Package][1] (DEB) generation to the exrm package manager.
 
