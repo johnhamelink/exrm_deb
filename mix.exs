@@ -34,8 +34,8 @@ defmodule ExrmDeb.Mixfile do
   defp deps(_) do
     [
      {:exrm, "~> 1.0"},
-     {:timex, "~> 1.0.1"},
-     {:vex, "~> 0.5.5"}
+     {:timex, "~> 1.0"},
+     {:vex, "~> 0.5"}
     ]
   end
 
