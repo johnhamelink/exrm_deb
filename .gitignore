@@ -5,3 +5,4 @@ erl_crash.dump
 *.ez
 /rel
 /doc
+docs/all.json
