@@ -3,11 +3,9 @@ elixir:
   - 1.2.3
 otp_release:
   - 18.2.1
-env:
-  - MIX_ENV=test
 
 script:
-  - mix test
+  - MIX_ENV=test mix test
 after_script:
-  - mix coveralls.travis
-  - mix inch.report
+  - MIX_ENV=test mix coveralls.travis
+  - MIX_ENV=docs mix inch.report
