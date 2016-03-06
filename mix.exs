@@ -3,7 +3,7 @@ defmodule ExrmDeb.Mixfile do
 
   def project do
     [app: :exrm_deb,
-     version: "0.0.3",
+     version: "0.0.4",
      elixir: "~> 1.0",
      description: "Create a deb for your elixir release with ease",
      build_embedded: Mix.env == :prod,
@@ -63,7 +63,7 @@ defmodule ExrmDeb.Mixfile do
       ],
       external_dependencies: [],
       license_file: "LICENSE",
-      files: [ "lib", "mix.exs", "README*", "LICENSE"],
+      files: [ "lib", "mix.exs", "README*", "LICENSE", "templates"],
       maintainers: ["John Hamelink <john@johnhamelink.com>"],
       licenses: ["MIT"],
       vendor: "John Hamelink",
