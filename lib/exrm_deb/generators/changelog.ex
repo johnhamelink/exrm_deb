@@ -1,5 +1,6 @@
 defmodule ExrmDeb.Generators.Changelog do
   alias ReleaseManager.Utils.Logger
+  alias ExrmDeb.Generators.TemplateFinder
   import Logger, only: [debug: 1]
 
   def build(data_dir, config) do
@@ -10,11 +11,7 @@ defmodule ExrmDeb.Generators.Changelog do
       |> Timex.DateFormat.format("%a, %d %b %Y %H:%M:%S GMT", :strftime)
 
     changelog =
-      [
-        ExrmDeb.Utils.Config.project_dir,
-        "templates", "changelog.eex"
-      ]
-      |> Path.join
+      TemplateFinder.retrieve("changelog.eex")
       |> EEx.eval_file([
         sanitized_name: config.sanitized_name,
         version: config.version,

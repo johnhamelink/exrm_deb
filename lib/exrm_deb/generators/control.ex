@@ -1,16 +1,13 @@
 defmodule ExrmDeb.Generators.Control do
   alias ReleaseManager.Utils.Logger
+  alias ExrmDeb.Generators.TemplateFinder
   import Logger, only: [debug: 1]
 
   def build(config, control_dir) do
     debug "Building Control file"
 
     out =
-      [
-        ExrmDeb.Utils.Config.project_dir,
-        "templates", "control.eex"
-      ]
-      |> Path.join
+      TemplateFinder.retrieve("control.eex")
       |> EEx.eval_file([
         description: config.description,
         sanitized_name: config.sanitized_name,

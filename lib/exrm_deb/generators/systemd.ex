@@ -1,16 +1,13 @@
 defmodule ExrmDeb.Generators.Systemd do
   alias ReleaseManager.Utils.Logger
+  alias ExrmDeb.Generators.TemplateFinder
   import Logger, only: [debug: 1]
 
   def build(data_dir, config) do
     debug "Building Systemd Service File"
 
     systemd_script =
-      [
-        ExrmDeb.Utils.Config.project_dir,
-        "templates", "init_scripts", "systemd.service.eex"
-      ]
-      |> Path.join
+      TemplateFinder.retrieve(["init_scripts", "systemd.service.eex"])
       |> EEx.eval_file([
         description: config.description,
         name: config.name,
