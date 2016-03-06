@@ -97,6 +97,8 @@ A list of configuration options you can add to `package/0`:
 
 ## Usage
 
+### Building Deb file
+
 You can build a deb at the same time as building a release by adding the --deb option to release.
 
 ```bash
@@ -110,6 +112,16 @@ as the name, version, etc using the `mix.exs` file.
 The `_build/deb` directory tree, along with the rest of the release can be removed with `mix release.clean`
 
 Please visit [exrm][3] for additional information.
+
+### Customising deb config files
+
+You can customise the debs that are being built by copying the template files used and modifying them:
+
+```bash
+mix release.deb.generate_templates
+```
+
+When you next run `mix release --deb`, your custom templates will be used instead of the defaults inside the plugin.
 
 ## Installation
 
