@@ -18,7 +18,7 @@ Adds simple [Debian Package][1] (DEB) generation to the exrm package manager.
      2. [x] Systemd
      3. [ ] SysV
  7. [x] Validates configuration before completing the build
- 4. [ ] Add ability for you to replace file templates with your own
+ 4. [x] Add ability for you to replace file templates with your own
  5. [ ] Handle functionality for Hot Upgrades
  6. [ ] Merge debian to-be-deployed files with your own structure
 
