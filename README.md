@@ -13,12 +13,12 @@ Adds simple [Debian Package][1] (DEB) generation to the exrm package manager.
      1. [x] With changelog
      2. [x] With control file
  2. [x] Ability to add in pre/post install/remove scripts
+ 7. [x] Validates configuration before completing the build
+ 4. [x] Add ability for you to replace file templates with your own
  3. [ ] Automatically builds init scripts:
      1. [x] Upstart
      2. [x] Systemd
      3. [ ] SysV
- 7. [x] Validates configuration before completing the build
- 4. [x] Add ability for you to replace file templates with your own
  5. [ ] Handle functionality for Hot Upgrades
  6. [ ] Merge debian to-be-deployed files with your own structure
 
