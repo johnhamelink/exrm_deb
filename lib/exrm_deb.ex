@@ -5,7 +5,7 @@ defmodule ReleaseManager.Plugin.Deb do
 
   def before_release(_), do: nil
 
-  def after_release(%{deb: true} = config) do
+  def after_release(%{deb: true} = _config) do
     case ExrmDeb.Config.build_config do
       {:ok, config} -> start_build(config)
       _             -> nil
