@@ -29,7 +29,8 @@ defmodule ExrmDeb.Utils.Config do
   Retrieve the Application root, which is used when referring to relative files
   in the library (such as templates)
   """
-  def project_dir do
+  def root do
     Application.get_env(:exrm_deb, :root)
   end
+
 end
