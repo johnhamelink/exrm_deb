@@ -17,7 +17,7 @@ defmodule Mix.Tasks.Release.Deb.GenerateTemplates do
     copy_templates
   end
 
-  defp copy_templates() do
+  def copy_templates(dest \\ destination_dir) do
     Logger.info "Copying templates to ./rel/exrm_deb/templates"
     {:ok, _} =
       [ExrmDeb.Utils.Config.root, "templates"]
@@ -30,11 +30,11 @@ defmodule Mix.Tasks.Release.Deb.GenerateTemplates do
   defp make_dest_dir() do
     Logger.info "Making ./rel/exrm_deb/templates directory"
     :ok =
-      dest
+      destination_dir
       |> File.mkdir_p
   end
 
-  defp dest do
+  defp destination_dir do
     [ReleaseManager.Utils.rel_dest_path, "exrm_deb", "templates"]
     |> Path.join
   end
