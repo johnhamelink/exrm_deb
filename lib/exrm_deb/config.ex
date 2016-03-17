@@ -41,7 +41,16 @@ defmodule ExrmDeb.Config do
     |> check_valid
   end
 
-  defp config_from_package(value) do
+  defp config_from_package(nil) do
+    """
+    Error: You haven't defined any 'package' data in mix.exs.
+    Check the configuration section of the github repository to
+    see how to add this in.
+    """
+    |> String.replace("\n", " ")
+    |> throw
+  end
+  defp config_from_package(value) when is_list(value) do
     Enum.map(value, fn({key, value}) -> handle_config(key, value) end)
     |> Enum.dedup
     |> Enum.reject(&(is_nil(&1)))
