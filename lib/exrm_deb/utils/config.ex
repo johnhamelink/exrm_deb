@@ -30,7 +30,13 @@ defmodule ExrmDeb.Utils.Config do
   in the library (such as templates)
   """
   def root do
-    Application.get_env(:exrm_deb, :root)
+    Mix.Project.deps_paths
+    |> Map.fetch(:exrm_deb)
+    |> case do
+         {:ok, path} -> path
+         :error      -> # We're trying to build ourself!?
+           Application.get_env(:exrm_deb, :root)
+    end
   end
 
 end
