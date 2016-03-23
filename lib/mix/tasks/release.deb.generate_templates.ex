@@ -27,7 +27,7 @@ defmodule Mix.Tasks.Release.Deb.GenerateTemplates do
       end)
   end
 
-  defp make_dest_dir() do
+  defp make_dest_dir do
     Logger.info "Making ./rel/exrm_deb/templates directory"
     :ok =
       destination_dir
