@@ -30,8 +30,8 @@ defmodule ExrmDeb.Mixfile do
 
   defp deps(:test) do
     deps(:all) ++ [
-      {:faker, "~> 0.6"},
-      {:excoveralls, "~> 0.4"},
+      {:faker, "~> 0.6", only: :test},
+      {:excoveralls, "~> 0.4", only: :test},
     ]
   end
 
@@ -43,8 +43,8 @@ defmodule ExrmDeb.Mixfile do
 
   defp deps(:dev) do
     deps(:all) ++ [
-      {:ex_doc, "~> 0.11"},
-      {:earmark, "~> 0.2"}
+      {:ex_doc, "~> 0.11", only: :dev},
+      {:earmark, "~> 0.2", only: :dev}
     ]
   end
 
