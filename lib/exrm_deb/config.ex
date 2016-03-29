@@ -56,41 +56,26 @@ defmodule ExrmDeb.Config do
     |> Enum.reject(&(is_nil(&1)))
   end
 
-  defp handle_config(:licenses, value) when is_list(value) do
-    case Enum.count(value) do
-      0 -> nil
-      _ -> {:licenses, Enum.join(value, ", ")}
-    end
+  @joining_list_values [:licenses, :maintainers, :external_dependencies]
+
+  defp handle_config(key, [_|_] = value) when key in @joining_list_values do
+    {key, Enum.join(value, ", ")}
   end
-  defp handle_config(:maintainers, value) when is_list(value) do
-    case Enum.count(value) do
-      0 -> nil
-      _ -> {:maintainers, Enum.join(value, ", ")}
-    end
+  defp handle_config(:maintainer_scripts, [_|_] = value) do
+    {:maintainer_scripts, value}
   end
-  defp handle_config(:external_dependencies, value) when is_list(value) do
-    case Enum.count(value) do
-      0 -> nil
-      _ -> {:external_dependenices, Enum.join(value, ", ")}
-    end
+  defp handle_config(:links, %{"Homepage" => value}) do
+    {:homepage, value}
   end
-  defp handle_config(:maintainer_scripts, value) when is_list(value) do
-    case Enum.count(value) do
-      0 -> nil
-      _ -> {:maintainer_scripts, value}
-    end
+  defp handle_config(:vendor, value) when byte_size(value) > 0 do
+    {:vendor, value}
   end
-  defp handle_config(:links, value) when is_map(value) do
-    case Map.fetch!(value, "Homepage") do
-      nil -> nil
-      homepage -> {:homepage, homepage}
-    end
+  defp handle_config(:owner, value) when is_list(value) do
+    handle_config(:owner, Enum.into(value, %{}))
   end
-  defp handle_config(:vendor, value) when is_binary(value) do
-    case String.length(value) do
-      0 -> nil
-      _ -> {:vendor, value}
-    end
+  defp handle_config(:owner, %{user: user, group: group})
+      when user != nil and group != nil do
+    {:owner, [user: user, group: group]}
   end
   defp handle_config(_, _), do: nil
 
