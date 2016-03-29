@@ -92,6 +92,14 @@ defmodule ExrmDeb.Config do
       _ -> {:vendor, value}
     end
   end
+  defp handle_config(:owner, value) when is_list(value) do
+    case {value[:user], value[:group]} do
+      {user, group} when user != nil and group != nil ->
+        {:owner, value}
+      _ ->
+        nil
+    end
+  end
   defp handle_config(_, _), do: nil
 
   defp check_valid(config = %ExrmDeb.Config{}) do
