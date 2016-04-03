@@ -3,41 +3,31 @@ defmodule ExrmDeb.Utils.Compression do
   import Logger, only: [debug: 1]
 
   @doc """
-  Decides which tar binary to use (in OSX, we need to use gtar)
+  Gzip Compress a directory
   """
-  def tar_cmd do
-    case :os.type do
-      {:unix, :darwin} -> "gtar"
-      _ -> "tar"
-    end
-  end
-
-  @doc """
-  Gzip Compress a directory, optionally also adding extra parameters to tar
-  such as the uid & gid to add to files.
-  """
-  def compress(dir, outfile, opts \\ []) do
+  def compress(dir, outfile) do
     debug "Compressing #{dir} -> #{outfile}"
 
-    opts =
-      opts
-      |> Enum.flat_map(fn(option) ->
-        case option do
-          {:owner, value} -> ["--owner", value[:user], "--group", value[:group]]
-          {key, value} -> ["--#{Atom.to_string(key)}", value]
-          _ -> [option]
-        end
-      end)
+    # generate file list based on given directory
+    file_list = dir
+                |> File.ls!
+                |> Enum.map(&({'#{&1}','#{Path.join([dir, &1])}'}))
 
-    cmd_opts = opts ++ ["-acf", outfile, "."]
+    # always use an absolute path for destination file
+    destfile =  outfile
+                |> Path.type
+                |> case do
+                  :relative -> Path.join([dir, outfile])
+                  _         -> outfile
+                end
+                |> Path.expand
 
-    {_ignore, 0} = System.cmd(
-      tar_cmd,
-      cmd_opts,
-      cd: dir,
-      stderr_to_stdout: true,
-      env: [{"GZIP", "-9"}]
+    :ok = :erl_tar.create(
+      '#{destfile}',
+      file_list,
+      [:compressed]
     )
+
   end
 
 end
