@@ -51,4 +51,26 @@ defmodule ExrmDeb.Utils.File do
     {:ok, _files} = File.rm_rf(dir)
   end
 
+  @doc """
+  List all files recursively
+  """
+  def ls_r(path \\ ".") do
+    do_ls_r(path, path)
+  end
+
+  defp do_ls_r(init_path, path, acc \\ []) do
+    path
+    |> File.ls!
+    |> Enum.reduce(acc, fn(new_path, acc) ->
+      new_path = Path.join(path, new_path)
+
+      new_path
+      |> File.dir?
+      |> case do
+        true -> do_ls_r(init_path, new_path, acc)
+        _ -> [Path.relative_to(new_path, init_path) | acc]
+      end
+    end)
+  end
+
 end
