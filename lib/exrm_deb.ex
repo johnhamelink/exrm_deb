@@ -32,7 +32,7 @@ defmodule ReleaseManager.Plugin.Deb do
 
   defp remove_deb_dir do
     Path.join([Mix.Project.build_path, "deb"])
-    |> File.rmdir
+    |> File.rm_rf
   end
 
   defp initialize_dir do
