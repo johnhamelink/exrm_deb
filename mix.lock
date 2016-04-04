@@ -19,6 +19,7 @@
   "providers": {:hex, :providers, "1.6.0"},
   "relx": {:hex, :relx, "3.18.0"},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"},
+  "swab": {:git, "https://github.com/crownedgrouse/swab.git", "1610c706d07c82a9c8f6129a8cb6a0e8ac8e6fcd", [branch: "master"]},
   "timex": {:hex, :timex, "1.0.1"},
   "tzdata": {:hex, :tzdata, "0.5.6"},
   "vex": {:hex, :vex, "0.5.5"}}
