@@ -16,7 +16,7 @@ defmodule ExrmDeb.Generators.Systemd do
       ])
 
     out_dir =
-      [data_dir, "etc", "systemd", "system", "multi-user.target.wants"]
+      [data_dir, "lib", "systemd", "system"]
       |> Path.join
 
     :ok = File.mkdir_p(out_dir)
