@@ -7,8 +7,8 @@ defmodule ExrmDeb.Generators.Changelog do
     debug "Building Changelog file"
 
     {:ok, time} =
-      Timex.Date.universal
-      |> Timex.DateFormat.format("%a, %d %b %Y %H:%M:%S GMT", :strftime)
+      Timex.DateTime.today
+      |> Timex.format("%a, %d %b %Y %H:%M:%S GMT", :strftime)
 
     changelog =
       TemplateFinder.retrieve("changelog.eex")

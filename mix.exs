@@ -51,7 +51,7 @@ defmodule ExrmDeb.Mixfile do
   defp deps(_) do
     [
      {:exrm, "~> 1.0"},
-     {:timex, "~> 1.0"},
+     {:timex, "~> 2.1"},
      {:vex, "~> 0.5"},
      {:swab, github: "crownedgrouse/swab", branch: "master"}
     ]
