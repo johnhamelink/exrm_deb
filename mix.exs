@@ -25,7 +25,7 @@ defmodule ExrmDeb.Mixfile do
   end
 
   defp apps(_) do
-    [:logger, :exrm, :timex, :vex, :swab]
+    [:logger, :exrm, :timex, :vex]
   end
 
   defp deps(:test) do
@@ -52,8 +52,7 @@ defmodule ExrmDeb.Mixfile do
     [
      {:exrm, "~> 1.0"},
      {:timex, "~> 2.1"},
-     {:vex, "~> 0.5"},
-     {:swab, github: "crownedgrouse/swab", branch: "master"}
+     {:vex, "~> 0.5"}
     ]
   end
 

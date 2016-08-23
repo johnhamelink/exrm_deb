@@ -26,6 +26,7 @@ Adds simple [Debian Package][1] (DEB) generation to the exrm package manager.
 
 Before using exrm-deb, you'll need the following commands installed and in your path:
 
+ - `tar` (or `gtar` if you're on a mac - you can `brew install gnu-tar` if you don't already have it)
  - `ar`
  - `uname`
 

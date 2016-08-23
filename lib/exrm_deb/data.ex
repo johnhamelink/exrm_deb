@@ -20,7 +20,7 @@ defmodule ExrmDeb.Data do
     ExrmDeb.Utils.Compression.compress(
       data_dir,
       Path.join([data_dir, "..", "data.tar.gz"]),
-      fakeroot: true
+      owner: config.owner
     )
     ExrmDeb.Utils.File.remove_tmp(data_dir)
 

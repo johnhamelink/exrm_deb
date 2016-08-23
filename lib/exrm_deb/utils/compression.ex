@@ -2,47 +2,42 @@ defmodule ExrmDeb.Utils.Compression do
   alias  ReleaseManager.Utils.Logger
   import Logger, only: [debug: 1]
 
+
+  @doc """
+  Decides which tar binary to use (in OSX, we need to use gtar)
+  """
+  def tar_cmd do
+    case :os.type do
+      {:unix, :darwin} -> "gtar"
+      _ -> "tar"
+    end
+  end
+
   @doc """
   Gzip Compress a directory
   """
   def compress(dir, outfile, opts \\ []) do
     debug "Compressing #{dir} -> #{outfile}"
 
-    # generate file list based on given directory
-    file_list = dir
-                |> ExrmDeb.Utils.File.ls_r
-                |> Enum.map(&({'#{&1}','#{Path.join([dir, &1])}'}))
-
-    # always use an absolute path for destination file
-    destfile =  outfile
-                |> Path.type
-                |> case do
-                  :relative -> Path.join([dir, outfile])
-                  _         -> outfile
-                end
-                |> Path.expand
-
-    # create tmp tar file
-    :ok = :erl_tar.create(
-      '#{destfile}.tmp',
-      file_list,
-      [:compressed]
-    )
-
-    opts
-    |> Keyword.get(:fakeroot, false)
-    |> if do
-        # set all files in tar to uid/gid 0/0
-        {:ok, gzip} = :swab.sync [convert: :gunzip, tar: :fakeroot, convert: :gzip], File.read!(destfile <> ".tmp")
-
-        # create final tar file
-        :ok = File.write!(destfile, gzip)
-
-        :ok = File.rm!(destfile <> ".tmp")
-      else
-        # no fakeroot, just rename
-        File.rename destfile <> ".tmp", destfile
+    opts =
+      opts
+      |> Enum.flat_map(fn(option) ->
+      case option do
+        {:owner, value} -> ["--owner", value[:user], "--group", value[:group]]
+        {key, value} -> ["--#{Atom.to_string(key)}", value]
+        _ -> [option]
       end
+    end)
+
+    cmd_opts = opts ++ ["-acf", outfile, "."]
+
+    {_ignore, 0} = System.cmd(
+      tar_cmd,
+      cmd_opts,
+      cd: dir,
+      stderr_to_stdout: true,
+      env: [{"GZIP", "-9"}]
+    )
   end
 
 end
