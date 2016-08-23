@@ -1,9 +1,5 @@
 ExUnit.start()
 
-# Required to stop Logger.debug from returning
-# GenServer errors.
-ReleaseManager.Utils.Logger.start_link
-
 defmodule TestHelper do
 
   def tmp_directory(path) do
