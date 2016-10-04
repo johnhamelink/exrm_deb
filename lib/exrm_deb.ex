@@ -1,32 +1,13 @@
-defmodule ReleaseManager.Plugin.Deb do
+defmodule ExrmDeb do
   @moduledoc ~S"""
   This module is used to kick off the debian package generation process.
   """
-  require ReleaseManager.Config
-  use ReleaseManager.Plugin
-
   import Logger, only: [info: 1, debug: 1]
   alias ExrmDeb.{Control, Data, Deb}
   alias Mix.Project
 
-  def before_release(_), do: nil
-
-  def after_release(%{deb: true} = _config) do
-    case ExrmDeb.Config.build_config do
-      {:ok, config} -> start_build(config)
-      _             -> nil
-    end
-  end
-
-  def after_release(_), do: nil
-  def after_package(_), do: nil
-
-  def after_cleanup(_args) do
-    remove_deb_dir
-  end
-
-  defp start_build(config) do
-    remove_deb_dir
+  def start_build(config) do
+    ExrmDeb.remove_deb_dir
     deb_root = initialize_dir
 
     {:ok, config} = Data.build(deb_root, config)

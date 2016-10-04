@@ -46,14 +46,15 @@ defmodule ExrmDeb.Mixfile do
 
   defp deps(:dev) do
     deps(:all) ++ [
-      {:ex_doc, "~> 0.11", only: :dev},
-      {:earmark, "~> 0.2", only: :dev}
+      {:ex_doc, "~> 0.13", only: :dev},
+      {:earmark, "~> 1.0", only: :dev}
     ]
   end
 
   defp deps(_) do
     [
      {:exrm, "~> 1.0"},
+     {:distillery, "~> 0.10"},
      {:timex, "~> 3.0"},
      {:vex, "~> 0.5"},
      {:swab, github: "crownedgrouse/swab", branch: "master"},
