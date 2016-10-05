@@ -7,8 +7,15 @@ defmodule ExrmDebTest.GenerateTemplatesTest do
     assert Mix.Tasks.Release.Deb.GenerateTemplates.copy_templates(dest)
     assert [dest, "changelog.eex"] |> Path.join |> File.exists?
     assert [dest, "control.eex"] |> Path.join |> File.exists?
-    assert [dest, "init_scripts", "systemd.service.eex"] |> Path.join |> File.exists?
-    assert [dest, "init_scripts", "upstart.conf.eex"] |> Path.join |> File.exists?
+
+    assert [dest, "init_scripts", "systemd.service.eex"]
+    |> Path.join
+    |> File.exists?
+
+    assert [dest, "init_scripts", "upstart.conf.eex"]
+    |> Path.join
+    |> File.exists?
+
     assert File.rm_rf!(dest)
   end
 

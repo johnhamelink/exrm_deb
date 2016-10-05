@@ -28,7 +28,8 @@ defmodule ExrmDebTest.DataTest do
   test "Builds data directory correctly", meta do
     data_pkg = Path.join([meta.config.test_dir, "data.tar.gz"])
 
-    app_path = Path.join([meta.config.test_dir, "rel", meta.config.metadata.name])
+    app_path =
+      Path.join([meta.config.test_dir, "rel", meta.config.metadata.name])
     src_test_file = Path.join(app_path, "test_file")
 
     dest_test_file = Path.join([
@@ -50,11 +51,15 @@ defmodule ExrmDebTest.DataTest do
     :ok = File.write(src_test_file, "Lorem Ipsum")
 
     # Build the data package
-    assert {:ok, _} = ExrmDeb.Data.build(meta.config.test_dir, meta.config.metadata)
+    assert {:ok, _} =
+      ExrmDeb.Data.build(meta.config.test_dir, meta.config.metadata)
     assert true     = File.exists?(data_pkg)
 
     # Unpack it
-    System.cmd("tar", ["-zxvf", data_pkg], stderr_to_stdout: true)
+    System.cmd(
+      "tar",
+      ["-zxvf", data_pkg],
+      stderr_to_stdout: true)
     assert true = File.exists? dest_test_file
     assert true = File.exists? changelog
   end

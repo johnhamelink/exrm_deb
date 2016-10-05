@@ -36,8 +36,8 @@ defmodule ExrmDebTest.FileTest do
     ExrmDeb.Utils.File.remove_fs_metadata(meta.config.test_dir)
 
     # Check they've been removed
-    assert File.exists?(Path.join(meta.config.test_dir, ".DS_Store")) == false
-    assert File.exists?(Path.join(meta.config.test_dir, "thumbs.db")) == false
+    refute File.exists?(Path.join(meta.config.test_dir, ".DS_Store"))
+    refute File.exists?(Path.join(meta.config.test_dir, "thumbs.db"))
 
   end
 

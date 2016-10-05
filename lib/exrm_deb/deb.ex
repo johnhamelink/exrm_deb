@@ -1,4 +1,9 @@
 defmodule ExrmDeb.Deb do
+  @moduledoc ~S"""
+  This module is used to produce the final debian package file, using the "ar"
+  compression tool.
+  """
+
   alias  ReleaseManager.Utils.Logger
   import Logger, only: [debug: 1]
 

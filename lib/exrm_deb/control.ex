@@ -1,4 +1,8 @@
 defmodule ExrmDeb.Control do
+  @moduledoc ~S"""
+  This module houses the logic required to build the control file and include
+  custom control data such as pre/post install hooks.
+  """
   alias ReleaseManager.Utils.Logger
   import Logger, only: [debug: 1]
 

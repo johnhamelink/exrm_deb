@@ -1,4 +1,7 @@
 defmodule ExrmDeb.Generators.Upstart do
+  @moduledoc ~S"""
+  This module produces an Upstart init script from the config and a template.
+  """
   alias ReleaseManager.Utils.Logger
   alias ExrmDeb.Generators.TemplateFinder
   import Logger, only: [debug: 1]
@@ -7,7 +10,8 @@ defmodule ExrmDeb.Generators.Upstart do
     debug "Building Upstart file"
 
     upstart_script =
-      TemplateFinder.retrieve(["init_scripts", "upstart.conf.eex"])
+      ["init_scripts", "upstart.conf.eex"]
+      |> TemplateFinder.retrieve
       |> EEx.eval_file([
           description: config.description,
           name: config.name,

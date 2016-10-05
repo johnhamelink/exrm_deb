@@ -1,4 +1,7 @@
 defmodule ExrmDeb.Generators.TemplateFinder do
+  @moduledoc ~S"""
+  This module decides whether to use a custom template or to use the default.
+  """
   alias ReleaseManager.Utils.Logger
   import Logger, only: [debug: 1, info: 1]
 
@@ -9,7 +12,8 @@ defmodule ExrmDeb.Generators.TemplateFinder do
         info "Using user-provided file: #{path |> Path.basename}"
         path
       false ->
-        debug "Using default file: #{path |> Path.basename} - didn't find user-provided one"
+        debug("Using default file: #{path |> Path.basename}"
+           <> " - didn't find user-provided one")
         default_path(pathname)
     end
   end

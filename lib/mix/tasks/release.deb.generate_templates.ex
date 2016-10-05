@@ -23,7 +23,8 @@ defmodule Mix.Tasks.Release.Deb.GenerateTemplates do
       [ExrmDeb.Utils.Config.root, "templates"]
       |> Path.join
       |> File.cp_r(dest, fn(_source, destination) ->
-        IO.gets("Overwriting #{destination |> Path.basename }. Type y to confirm: ") == "y\n"
+        IO.gets("Overwriting #{destination |> Path.basename }." <>
+                "Type y to confirm: ") == "y\n"
       end)
   end
 

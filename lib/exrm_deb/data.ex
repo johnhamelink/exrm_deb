@@ -1,4 +1,8 @@
 defmodule ExrmDeb.Data do
+  @moduledoc ~S"""
+  This module houses the logic required to build the data payload portion of the
+  debian package.
+  """
   alias  ReleaseManager.Utils.Logger
   import Logger, only: [debug: 1]
 

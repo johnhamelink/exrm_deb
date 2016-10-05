@@ -10,7 +10,10 @@ defmodule ExrmDeb.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps(Mix.env),
      test_coverage: [tool: ExCoveralls],
-     preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test],
+     preferred_cli_env: [
+       "coveralls": :test,
+       "coveralls.detail": :test,
+       "coveralls.post": :test],
      package: package]
   end
 
@@ -53,7 +56,8 @@ defmodule ExrmDeb.Mixfile do
      {:exrm, "~> 1.0"},
      {:timex, "~> 3.0"},
      {:vex, "~> 0.5"},
-     {:swab, github: "crownedgrouse/swab", branch: "master"}
+     {:swab, github: "crownedgrouse/swab", branch: "master"},
+     {:dogma, "~> 0.1", only: :dev}
     ]
   end
 
