@@ -8,12 +8,12 @@ defmodule ExrmDebTest.ConfigTest do
   end
 
   test "building default config works correctly" do
-    assert {:ok, _} = ExrmDeb.Config.build_config
+    assert {:ok, _} = ExrmDeb.Config.build_config(:exrm)
   end
 
   test "building an invalid config results in an error being raised" do
     assert {:error, [{:error, :description, :presence, "must be present"}]} =
-           ExrmDeb.Config.build_config(%{description: nil})
+           ExrmDeb.Config.build_config(:exrm, %{description: nil})
   end
 
   test "owner must have both user and group" do

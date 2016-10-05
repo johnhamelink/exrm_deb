@@ -11,7 +11,7 @@ defmodule ExrmDeb.Config do
             arch: nil, owner: [user: "root", group: "root"]
 
   use Vex.Struct
-  alias  ReleaseManager.Utils.Logger
+  alias ReleaseManager.Utils.Logger
   alias Mix.Project
   import Logger, only: [debug: 1, error: 1]
 
@@ -30,7 +30,24 @@ defmodule ExrmDeb.Config do
   validates :licenses, presence: true
   validates :maintainers, presence: true
 
-  def build_config(old_config = %{} \\ %{}) do
+  def build_config(:distillery, release = %Mix.Releases.Release{}) do
+    base_config =
+      [
+        {:name, Atom.to_string(release.name)},
+        {:version, release.version},
+        {:description, Mix.Project.config[:description]},
+        {:arch, ExrmDeb.Utils.Config.detect_arch}
+      ] ++ config_from_package(Mix.Project.config[:package])
+      |> Enum.dedup
+      |> Enum.reject(&is_nil(&1))
+      |> Enum.into(%{})
+
+    ExrmDeb.Config
+    |> struct(base_config)
+    |> ExrmDeb.Utils.Config.sanitize_config
+    |> check_valid
+  end
+  def build_config(:exrm, old_config = %{}) do
     base_config =
       [
         {:name, Atom.to_string(Project.config[:app])},
@@ -50,6 +67,7 @@ defmodule ExrmDeb.Config do
     |> ExrmDeb.Utils.Config.sanitize_config
     |> check_valid
   end
+  def build_config(:exrm), do: build_config(:exrm, %{})
 
   defp config_from_package(nil) do
     """

@@ -1,12 +1,11 @@
 defmodule ReleaseManager.Plugin.Deb do
   require ReleaseManager.Config
   use ReleaseManager.Plugin
-  alias ExrmDeb.{Control, Data, Deb}
 
   def before_release(_), do: nil
 
   def after_release(%{deb: true} = _config) do
-    case ExrmDeb.Config.build_config do
+    case ExrmDeb.Config.build_config(:exrm) do
       {:ok, config} -> ExrmDeb.start_build(config)
       _             -> nil
     end
