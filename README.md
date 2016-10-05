@@ -100,6 +100,8 @@ A list of configuration options you can add to `package/0`:
 
 ### Building Deb file
 
+#### Exrm
+
 You can build a deb at the same time as building a release by adding the --deb option to release.
 
 ```bash
@@ -113,6 +115,10 @@ as the name, version, etc using the `mix.exs` file.
 The `_build/deb` directory tree, along with the rest of the release can be removed with `mix release.clean`
 
 Please visit [exrm][3] for additional information.
+
+#### Distillery
+
+You can build a deb by adding `plugin ExrmDeb.Distillery` to your `rel/config.exs` file. With distillery, the name and version is taken from the `rel/config.exs` file as opposed to the `mix.exs` file.
 
 ### Customising deb config files
 
