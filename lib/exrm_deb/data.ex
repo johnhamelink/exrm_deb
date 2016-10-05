@@ -4,6 +4,9 @@ defmodule ExrmDeb.Data do
   debian package.
   """
   alias  ReleaseManager.Utils.Logger
+  alias  ReleaseManager.Utils
+  alias  ExrmDeb.Utils.Compression
+  alias ExrmDeb.Generators.{Changelog, Upstart, Systemd}
   import Logger, only: [debug: 1]
 
   def build(dir, config) do
@@ -11,9 +14,9 @@ defmodule ExrmDeb.Data do
     copy_release(data_dir, config)
     remove_targz_file(data_dir, config)
     ExrmDeb.Utils.File.remove_fs_metadata(data_dir)
-    ExrmDeb.Generators.Changelog.build(data_dir, config)
-    ExrmDeb.Generators.Upstart.build(data_dir, config)
-    ExrmDeb.Generators.Systemd.build(data_dir, config)
+    Changelog.build(data_dir, config)
+    Upstart.build(data_dir, config)
+    Systemd.build(data_dir, config)
 
     config = Map.put_new(
       config,
@@ -21,7 +24,7 @@ defmodule ExrmDeb.Data do
       ExrmDeb.Utils.File.get_dir_size(data_dir)
     )
 
-    ExrmDeb.Utils.Compression.compress(
+    Compression.compress(
       data_dir,
       Path.join([data_dir, "..", "data.tar.gz"]),
       owner: config.owner
@@ -51,7 +54,7 @@ defmodule ExrmDeb.Data do
 
   defp copy_release(data_dir, config) do
     dest = Path.join([data_dir, "opt", config.name])
-    src = Path.join(ReleaseManager.Utils.rel_dest_path, config.name)
+    src = Path.join(Utils.rel_dest_path, config.name)
 
     debug("Copying #{src} into #{dest} directory")
     {:ok, _} = File.cp_r(src, dest)

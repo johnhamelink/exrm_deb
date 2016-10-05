@@ -7,6 +7,7 @@ defmodule ReleaseManager.Plugin.Deb do
 
   import Logger, only: [info: 1, debug: 1]
   alias ExrmDeb.{Control, Data, Deb}
+  alias Mix.Project
 
   def before_release(_), do: nil
 
@@ -37,13 +38,13 @@ defmodule ReleaseManager.Plugin.Deb do
   end
 
   def remove_deb_dir do
-    [Mix.Project.build_path, "deb"]
+    [Project.build_path, "deb"]
     |> Path.join
     |> File.rm_rf
   end
 
   defp initialize_dir do
-    deb_root = Path.join([Mix.Project.build_path, "deb"])
+    deb_root = Path.join([Project.build_path, "deb"])
 
     debug("Building base debian directory")
     :ok = File.mkdir_p(deb_root)

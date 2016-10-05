@@ -5,6 +5,7 @@ defmodule ExrmDeb.Generators.Changelog do
   """
   alias ReleaseManager.Utils.Logger
   alias ExrmDeb.Generators.TemplateFinder
+  alias ExrmDeb.Utils.Compression
   import Logger, only: [debug: 1]
 
   def build(data_dir, config) do
@@ -35,7 +36,7 @@ defmodule ExrmDeb.Generators.Changelog do
       |> Path.join
       |> File.write(changelog)
 
-    ExrmDeb.Utils.Compression.compress(doc_dir, "../changelog.gz")
+    Compression.compress(doc_dir, "../changelog.gz")
 
     [doc_dir, "changelog"]
     |> Path.join

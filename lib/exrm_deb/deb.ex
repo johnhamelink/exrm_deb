@@ -5,13 +5,14 @@ defmodule ExrmDeb.Deb do
   """
 
   alias  ReleaseManager.Utils.Logger
+  alias ReleaseManager.Utils
   import Logger, only: [debug: 1]
 
   def build(dir, config) do
     debug "Building deb file"
 
     out = Path.join([
-      ReleaseManager.Utils.rel_dest_path,
+      Utils.rel_dest_path,
       "#{config.sanitized_name}-#{config.version}.deb"
     ])
 
