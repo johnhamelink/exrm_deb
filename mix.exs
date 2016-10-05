@@ -59,7 +59,6 @@ defmodule ExrmDeb.Mixfile do
      {:swab, github: "crownedgrouse/swab", branch: "master"},
      {:dogma, "~> 0.1", only: [:dev, :test]},
      {:credo, "~> 0.4", only: [:dev, :test]}
->>>>>>> Use credo in strict mode
     ]
   end
 
