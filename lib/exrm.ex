@@ -1,4 +1,7 @@
 defmodule ReleaseManager.Plugin.Deb do
+  @moduledoc ~S"""
+  This module provides integration with Exrm.
+  """
   require ReleaseManager.Config
   use ReleaseManager.Plugin
 

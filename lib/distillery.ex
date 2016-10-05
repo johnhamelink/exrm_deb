@@ -1,4 +1,8 @@
 defmodule ExrmDeb.Distillery do
+  @moduledoc ~S"""
+  This module provides integration with
+  [Distillery](https://github.com/bitwalker/distillery)'s plugin system.
+  """
   use Mix.Releases.Plugin
 
   def before_assembly(release), do: release

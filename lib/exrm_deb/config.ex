@@ -38,6 +38,9 @@ defmodule ExrmDeb.Config do
         {:description, Mix.Project.config[:description]},
         {:arch, ExrmDeb.Utils.Config.detect_arch}
       ] ++ config_from_package(Mix.Project.config[:package])
+
+    base_config =
+      base_config
       |> Enum.dedup
       |> Enum.reject(&is_nil(&1))
       |> Enum.into(%{})
