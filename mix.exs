@@ -57,7 +57,7 @@ defmodule ExrmDeb.Mixfile do
      {:timex, "~> 3.0"},
      {:vex, "~> 0.5"},
      {:swab, github: "crownedgrouse/swab", branch: "master"},
-     {:dogma, "~> 0.1", only: :dev}
+     {:dogma, "~> 0.1", only: [:dev, :test]}
     ]
   end
 
