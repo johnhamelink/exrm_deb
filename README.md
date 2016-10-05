@@ -118,6 +118,12 @@ Please visit [exrm][3] for additional information.
 
 #### Distillery
 
+Distillery support is currently in the `feature/distillery-support` branch. You can require it in your `mix.exs` like so:
+
+```elixir
+{:exrm_deb, github: "johnhamelink/exrm_deb", branch: "feature/distillery-support"}
+```
+
 You can build a deb by adding `plugin ExrmDeb.Distillery` to your `rel/config.exs` file. With distillery, the name and version is taken from the `rel/config.exs` file as opposed to the `mix.exs` file.
 
 ### Customising deb config files
