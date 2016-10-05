@@ -1,6 +1,11 @@
 defmodule ReleaseManager.Plugin.Deb do
+  @moduledoc ~S"""
+  This module is used to kick off the debian package generation process.
+  """
   require ReleaseManager.Config
   use ReleaseManager.Plugin
+
+  import Logger, only: [info: 1, debug: 1]
   alias ExrmDeb.{Control, Data, Deb}
 
   def before_release(_), do: nil
@@ -27,11 +32,13 @@ defmodule ReleaseManager.Plugin.Deb do
     :ok = Control.build(deb_root, config)
     :ok = Deb.build(deb_root, config)
 
-    info("A debian package has successfully been created. You can find it in the ./rel directory")
+    info("A debian package has successfully been created." <>
+         "You can find it in the ./rel directory")
   end
 
-  defp remove_deb_dir do
-    Path.join([Mix.Project.build_path, "deb"])
+  def remove_deb_dir do
+    [Mix.Project.build_path, "deb"]
+    |> Path.join
     |> File.rm_rf
   end
 

@@ -1,4 +1,7 @@
 defmodule ExrmDeb.Utils.Config do
+  @moduledoc ~S"""
+  This module is used to retrieve basic information for use with configuration
+  """
 
   @doc """
   Use uname to detect the architecture we're currently building for

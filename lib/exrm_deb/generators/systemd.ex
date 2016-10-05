@@ -1,4 +1,7 @@
 defmodule ExrmDeb.Generators.Systemd do
+  @moduledoc ~S"""
+  This module produces a systemd unit file from the config and a template.
+  """
   alias ReleaseManager.Utils.Logger
   alias ExrmDeb.Generators.TemplateFinder
   import Logger, only: [debug: 1]
@@ -7,7 +10,8 @@ defmodule ExrmDeb.Generators.Systemd do
     debug "Building Systemd Service File"
 
     systemd_script =
-      TemplateFinder.retrieve(["init_scripts", "systemd.service.eex"])
+      ["init_scripts", "systemd.service.eex"]
+      |> TemplateFinder.retrieve
       |> EEx.eval_file([
         description: config.description,
         name: config.name,

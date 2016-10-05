@@ -1,4 +1,7 @@
 defmodule ExrmDeb.Utils.Compression do
+  @moduledoc ~S"""
+  This module provides utilities related to file compression
+  """
   alias  ReleaseManager.Utils.Logger
   import Logger, only: [debug: 1]
 

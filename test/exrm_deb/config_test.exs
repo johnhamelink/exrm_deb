@@ -17,8 +17,12 @@ defmodule ExrmDebTest.ConfigTest do
   end
 
   test "owner must have both user and group" do
-    assert {:error, [{:error, [:owner, :group], :presence, "must be present"}]} =
-           ExrmDeb.Config.build_config(%{owner: [user: "root"]})
+    assert {:error,
+            [{:error,
+              [:owner, :group],
+              :presence,
+              "must be present"}]} =
+      ExrmDeb.Config.build_config(%{owner: [user: "root"]})
   end
 
 end

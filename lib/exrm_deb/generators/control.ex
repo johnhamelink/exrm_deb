@@ -1,4 +1,7 @@
 defmodule ExrmDeb.Generators.Control do
+  @moduledoc ~S"""
+  This module builds a control file from the config and a template.
+  """
   alias ReleaseManager.Utils.Logger
   alias ExrmDeb.Generators.TemplateFinder
   import Logger, only: [debug: 1]
@@ -7,7 +10,8 @@ defmodule ExrmDeb.Generators.Control do
     debug "Building Control file"
 
     out =
-      TemplateFinder.retrieve("control.eex")
+      "control.eex"
+      |> TemplateFinder.retrieve
       |> EEx.eval_file([
         description: config.description,
         sanitized_name: config.sanitized_name,

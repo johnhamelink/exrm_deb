@@ -26,4 +26,3 @@ defmodule TestHelper do
   end
 
 end
-

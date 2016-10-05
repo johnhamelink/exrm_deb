@@ -1,4 +1,7 @@
 defmodule ExrmDeb.Utils.File do
+  @moduledoc ~S"""
+  This module provides functions about the filesystem.
+  """
   alias  ReleaseManager.Utils.Logger
   import Logger, only: [debug: 1]
 
