@@ -12,6 +12,7 @@ defmodule ExrmDeb.Config do
 
   use Vex.Struct
   alias  ReleaseManager.Utils.Logger
+  alias Mix.Project
   import Logger, only: [debug: 1, error: 1]
 
   # This version number format should be able to handle regular version
@@ -32,11 +33,11 @@ defmodule ExrmDeb.Config do
   def build_config(old_config = %{} \\ %{}) do
     base_config =
       [
-        {:name, Atom.to_string(Mix.Project.config[:app])},
-        {:version, Mix.Project.config[:version]},
-        {:description, Mix.Project.config[:description]},
+        {:name, Atom.to_string(Project.config[:app])},
+        {:version, Project.config[:version]},
+        {:description, Project.config[:description]},
         {:arch, ExrmDeb.Utils.Config.detect_arch}
-      ] ++ config_from_package(Mix.Project.config[:package])
+      ] ++ config_from_package(Project.config[:package])
 
     base_config =
       base_config

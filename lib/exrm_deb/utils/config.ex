@@ -2,6 +2,7 @@ defmodule ExrmDeb.Utils.Config do
   @moduledoc ~S"""
   This module is used to retrieve basic information for use with configuration
   """
+  alias Mix.Project
 
   @doc """
   Use uname to detect the architecture we're currently building for
@@ -33,7 +34,7 @@ defmodule ExrmDeb.Utils.Config do
   in the library (such as templates)
   """
   def root do
-    Mix.Project.deps_paths
+    Project.deps_paths
     |> Map.fetch(:exrm_deb)
     |> case do
          {:ok, path} -> path
