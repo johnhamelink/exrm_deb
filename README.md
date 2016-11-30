@@ -60,6 +60,7 @@ def package do
 +     external_dependencies: [],
 +     license_file: "LICENSE",
       files: [ "lib", "mix.exs", "README*", "LICENSE"],
++     config_files: ["/etc/init/api.conf"],
       maintainers: ["John Hamelink <john@example.com>"],
       licenses: ["MIT"],
       vendor: "John Hamelink",
@@ -74,8 +75,11 @@ end
 
 A list of configuration options you can add to `package/0`:
 
+ - `config_file`
+   - Array of Strings
+   - Should contain the absolute path of the config file to be overwritten.
  - `licenses`
-   - Array of strings
+   - Array of Strings
    - Can be something like `["Copyright <date> <company_name>"]` if you are building private packages.
  - `maintainers`
    - Array of Strings
