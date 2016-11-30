@@ -21,6 +21,7 @@ defmodule TestHelper do
       homepage:              Faker.Internet.url,
       description:           Faker.Lorem.paragraph(1..5),
       maintainer_scripts:    [],
+      config_files:          ["dummy_file"],
       owner:                 [user: "root", group: "root"]
     } |> ExrmDeb.Utils.Config.sanitize_config
   end

@@ -6,7 +6,7 @@ defmodule ExrmDeb.Config do
   """
 
   defstruct name: nil, version: nil, licenses: nil, maintainers: nil,
-            external_dependencies: nil, maintainer_scripts: [],
+            external_dependencies: nil, maintainer_scripts: [], config_files: [],
             homepage: nil, description: nil, vendor: nil,
             arch: nil, owner: [user: "root", group: "root"]
 

@@ -17,6 +17,7 @@ defmodule ExrmDeb.Control do
 
     Control.build(config, control_dir)
     add_custom_hooks(config, control_dir)
+    add_conffiles_file(config, control_dir)
     Compression.compress(
       control_dir,
       Path.join([control_dir, "..", "control.tar.gz"])
@@ -24,6 +25,15 @@ defmodule ExrmDeb.Control do
     ExrmDeb.Utils.File.remove_tmp(control_dir)
 
     :ok
+  end
+
+  defp add_conffiles_file(config, control_dir) do
+    IO.inspect(config)
+    debug "Marking config files"
+    config_files = Map.get(config, :config_files, [])
+    :ok =
+      Path.join([control_dir, "conffiles"])
+      |> File.write(Enum.join(config_files, "\n"))
   end
 
   defp add_custom_hooks(config, control_dir) do
