@@ -28,7 +28,6 @@ defmodule ExrmDeb.Control do
   end
 
   defp add_conffiles_file(config, control_dir) do
-    IO.inspect(config)
     debug "Marking config files"
     config_files = Map.get(config, :config_files, [])
     :ok =

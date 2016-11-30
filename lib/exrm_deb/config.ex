@@ -93,6 +93,9 @@ defmodule ExrmDeb.Config do
   defp handle_config(key, [_ | _] = value) when key in @joining_list_values do
     {key, Enum.join(value, ", ")}
   end
+  defp handle_config(:config_files, value) do
+    {:config_files, value}
+  end
   defp handle_config(:maintainer_scripts, [_ | _] = value) do
     {:maintainer_scripts, value}
   end
