@@ -4,7 +4,6 @@ defmodule ExrmDeb.Data do
   debian package.
   """
   alias  ReleaseManager.Utils.Logger
-  alias  ReleaseManager.Utils
   alias  ExrmDeb.Utils.Compression
   alias ExrmDeb.Generators.{Changelog, Upstart, Systemd}
   import Logger, only: [debug: 1]
@@ -54,7 +53,7 @@ defmodule ExrmDeb.Data do
 
   defp copy_release(data_dir, config) do
     dest = Path.join([data_dir, "opt", config.name])
-    src = Path.join(Utils.rel_dest_path, config.name)
+    src = Path.join([Mix.Project.build_path, "rel", config.name])
 
     debug("Copying #{src} into #{dest} directory")
     {:ok, _} = File.cp_r(src, dest)
