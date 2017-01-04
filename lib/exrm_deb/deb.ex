@@ -16,6 +16,8 @@ defmodule ExrmDeb.Deb do
       "#{config.sanitized_name}-#{config.version}.deb"
     ])
 
+    File.rm out
+
     args = [
       "-qc",
       out,
