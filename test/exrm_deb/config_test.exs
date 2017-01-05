@@ -22,7 +22,6 @@ defmodule ExrmDebTest.ConfigTest do
               [:owner, :group],
               :presence,
               "must be present"}]} =
-      ExrmDeb.Config.build_config(%{owner: [user: "root"]})
+      ExrmDeb.Config.build_config(:exrm, %{owner: [user: "root"]})
   end
-
 end
