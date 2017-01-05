@@ -8,7 +8,7 @@ defmodule ExrmDeb.Config do
   defstruct name: nil, version: nil, licenses: nil, maintainers: nil,
             external_dependencies: nil, maintainer_scripts: [],
             config_files: [], homepage: nil, description: nil,
-            vendor: nil, arch: nil,
+            vendor: nil, arch: nil, distillery: false,
             owner: [user: "root", group: "root"]
 
   use Vex.Struct
@@ -38,7 +38,8 @@ defmodule ExrmDeb.Config do
         {:name, Atom.to_string(release.name)},
         {:version, release.version},
         {:description, Project.config[:description]},
-        {:arch, Utils.Config.detect_arch}
+        {:arch, Utils.Config.detect_arch},
+        {:distillery, true}
       ] ++ config_from_package(Project.config[:package])
 
     base_config =
