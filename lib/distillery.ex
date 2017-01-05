@@ -4,11 +4,12 @@ defmodule ExrmDeb.Distillery do
   [Distillery](https://github.com/bitwalker/distillery)'s plugin system.
   """
   use Mix.Releases.Plugin
+  alias ExrmDeb.Config
 
   def before_assembly(release, _options), do: release
   def after_assembly(release = %Release{}, _options) do
     info "Building Deb Package"
-    case ExrmDeb.Config.build_config(:distillery, release) do
+    case Config.build_config(:distillery, release) do
       {:ok, config} ->
         ExrmDeb.start_build(config)
         release

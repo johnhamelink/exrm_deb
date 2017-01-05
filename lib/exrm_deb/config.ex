@@ -6,12 +6,14 @@ defmodule ExrmDeb.Config do
   """
 
   defstruct name: nil, version: nil, licenses: nil, maintainers: nil,
-            external_dependencies: nil, maintainer_scripts: [], config_files: [],
-            homepage: nil, description: nil, vendor: nil,
-            arch: nil, owner: [user: "root", group: "root"]
+            external_dependencies: nil, maintainer_scripts: [],
+            config_files: [], homepage: nil, description: nil,
+            vendor: nil, arch: nil,
+            owner: [user: "root", group: "root"]
 
   use Vex.Struct
   alias ReleaseManager.Utils.Logger
+  alias ExrmDeb.Utils
   alias Mix.Project
   import Logger, only: [debug: 1, error: 1]
 
@@ -35,9 +37,9 @@ defmodule ExrmDeb.Config do
       [
         {:name, Atom.to_string(release.name)},
         {:version, release.version},
-        {:description, Mix.Project.config[:description]},
-        {:arch, ExrmDeb.Utils.Config.detect_arch}
-      ] ++ config_from_package(Mix.Project.config[:package])
+        {:description, Project.config[:description]},
+        {:arch, Utils.Config.detect_arch}
+      ] ++ config_from_package(Project.config[:package])
 
     base_config =
       base_config

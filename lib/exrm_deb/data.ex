@@ -3,9 +3,10 @@ defmodule ExrmDeb.Data do
   This module houses the logic required to build the data payload portion of the
   debian package.
   """
-  alias  ReleaseManager.Utils.Logger
-  alias  ExrmDeb.Utils.Compression
+  alias ReleaseManager.Utils.Logger
+  alias ExrmDeb.Utils.Compression
   alias ExrmDeb.Generators.{Changelog, Upstart, Systemd}
+  alias Mix.Project
   import Logger, only: [debug: 1]
 
   def build(dir, config) do
@@ -53,7 +54,7 @@ defmodule ExrmDeb.Data do
 
   defp copy_release(data_dir, config) do
     dest = Path.join([data_dir, "opt", config.name])
-    src = Path.join([Mix.Project.build_path, "rel", config.name])
+    src = Path.join([Project.build_path, "rel", config.name])
 
     debug("Copying #{src} into #{dest} directory")
     {:ok, _} = File.cp_r(src, dest)
