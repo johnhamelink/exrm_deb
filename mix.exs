@@ -28,7 +28,7 @@ defmodule ExrmDeb.Mixfile do
   end
 
   defp apps(_) do
-    [:logger, :exrm, :timex, :vex]
+    [:logger, :exrm, :timex, :vex, :swab]
   end
 
   defp deps(:test) do
