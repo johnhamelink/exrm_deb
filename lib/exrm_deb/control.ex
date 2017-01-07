@@ -31,7 +31,8 @@ defmodule ExrmDeb.Control do
     debug "Marking config files"
     config_files = Map.get(config, :config_files, [])
     :ok =
-      Path.join([control_dir, "conffiles"])
+      [control_dir, "conffiles"]
+      |> Path.join()
       |> File.write(Enum.join(config_files, "\n"))
   end
 
