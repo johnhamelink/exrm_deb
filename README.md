@@ -99,6 +99,9 @@ A list of configuration options you can add to `package/0`:
    - If set, requires both `user` and `group` keys to be set.
    - This is used when building the archive to set the correct user and group
    - Defaults to root for user & group.
+ - `codename`
+   - String
+   - Should contain the distribution codename to be chained to version number.
 
 ## Usage
 

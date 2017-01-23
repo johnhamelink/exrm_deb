@@ -5,9 +5,10 @@ defmodule ExrmDeb.Config do
   the data is in the correct format.
   """
 
-  defstruct name: nil, version: nil, licenses: nil, maintainers: nil,
-            external_dependencies: nil, maintainer_scripts: [],
-            config_files: [], homepage: nil, description: nil,
+  defstruct name: nil, version: nil, codename: nil, licenses: nil,
+            maintainers: nil, external_dependencies: nil,
+            maintainer_scripts: [], config_files: [],
+            homepage: nil, description: nil,
             vendor: nil, arch: nil, distillery: false,
             owner: [user: "root", group: "root"]
 
@@ -15,7 +16,7 @@ defmodule ExrmDeb.Config do
   alias ReleaseManager.Utils.Logger
   alias ExrmDeb.Utils
   alias Mix.Project
-  import Logger, only: [debug: 1, error: 1]
+  import Logger, only: [error: 1]
 
   # This version number format should be able to handle regular version
   # numbers as well as alpha/beta versions
@@ -36,11 +37,11 @@ defmodule ExrmDeb.Config do
     base_config =
       [
         {:name, Atom.to_string(release.name)},
-        {:version, release.version},
         {:description, Project.config[:description]},
         {:arch, Utils.Config.detect_arch},
         {:distillery, true}
       ] ++ config_from_package(Project.config[:package])
+        ++ config_version(release.version, Project.config[:package][:codename])
 
     base_config =
       base_config
@@ -57,10 +58,11 @@ defmodule ExrmDeb.Config do
     base_config =
       [
         {:name, Atom.to_string(Project.config[:app])},
-        {:version, Project.config[:version]},
         {:description, Project.config[:description]},
         {:arch, ExrmDeb.Utils.Config.detect_arch}
       ] ++ config_from_package(Project.config[:package])
+        ++ config_version(Project.config[:version],
+                          Project.config[:package][:codename])
 
     base_config =
       base_config
@@ -74,6 +76,13 @@ defmodule ExrmDeb.Config do
     |> check_valid
   end
   def build_config(:exrm), do: build_config(:exrm, %{})
+
+  defp config_version(version, codename) when codename != nil do
+    [{:version, version <> "~" <> codename}]
+  end
+  defp config_version(version, _) do
+    [{:version, version}]
+  end
 
   defp config_from_package(nil) do
     """
