@@ -58,6 +58,7 @@ The `package` function must be set as per the [hex guidelines][2], but with some
 def package do
    [
 +     external_dependencies: [],
++     codename: lsb_release(),
 +     license_file: "LICENSE",
       files: [ "lib", "mix.exs", "README*", "LICENSE"],
 +     config_files: ["/etc/init/api.conf"],
@@ -70,6 +71,13 @@ def package do
 +       "Homepage" => "https://github.com/johnhamelink/testapp"
       }
    ]
+end
+```
+
+```
+def lsb_release do
+  {release, _} = System.cmd("lsb_release", ["-c", "-s"])
+  String.replace(release, "\n", "")
 end
 ```
 
@@ -102,6 +110,20 @@ A list of configuration options you can add to `package/0`:
  - `codename`
    - String
    - Should contain the distribution codename to be chained to version number.
+
+### Additional details about codename
+
+This configuration can be very useful in case you want to package the same version
+of the app for different distribution dinamically, without modifying the version
+in Distillery configuration.
+
+A typical use case can be an environment where you have different Docker containers,
+with different OS, each container compiles and packages the application in the running OS,
+in order to avoid startup problems in production.
+
+With codename, at the end of the process, you obtain a package in the form "myapp-1.2.1~xenial_amd64.deb".
+Also the control script in deb file is packaged with the correct version like 1.2.1~xenial.
+At this point, it easier to manage the packages loaded in a repository, because they are versioned also by distribution.
 
 ## Usage
 
