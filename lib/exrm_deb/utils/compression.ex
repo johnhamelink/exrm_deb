@@ -35,7 +35,7 @@ defmodule ExrmDeb.Utils.Compression do
     cmd_opts = opts ++ ["-acf", outfile, "."]
 
     {_ignore, 0} = System.cmd(
-      tar_cmd,
+      tar_cmd(),
       cmd_opts,
       cd: dir,
       stderr_to_stdout: true,

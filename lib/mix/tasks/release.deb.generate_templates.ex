@@ -15,11 +15,11 @@ defmodule Mix.Tasks.Release.Deb.GenerateTemplates do
   alias ReleaseManager.Utils
 
   def run(_args) do
-    make_dest_dir
-    copy_templates
+    make_dest_dir()
+    copy_templates()
   end
 
-  def copy_templates(dest \\ destination_dir) do
+  def copy_templates(dest \\ destination_dir()) do
     Logger.info "Copying templates to ./rel/exrm_deb/templates"
     {:ok, _} =
       [ConfigUtil.root, "templates"]
@@ -33,7 +33,7 @@ defmodule Mix.Tasks.Release.Deb.GenerateTemplates do
   defp make_dest_dir do
     Logger.info "Making ./rel/exrm_deb/templates directory"
     :ok =
-      destination_dir
+      destination_dir()
       |> File.mkdir_p
   end
 

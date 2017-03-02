@@ -13,7 +13,7 @@ defmodule ExrmDeb.Deb do
 
     out = Path.join([
       Utils.rel_dest_path,
-      "#{config.sanitized_name}-#{config.version}.deb"
+      "#{config.sanitized_name}-#{config.version}_#{config.arch}.deb"
     ])
 
     File.rm out
