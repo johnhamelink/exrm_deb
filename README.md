@@ -114,16 +114,16 @@ A list of configuration options you can add to `package/0`:
 ### Additional details about codename
 
 This configuration can be very useful in case you want to package the same version
-of the app for different distribution dinamically, without modifying the version
+of the app for different distributions dynamically, without modifying the version
 in Distillery configuration.
 
 A typical use case can be an environment where you have different Docker containers,
-with different OS, each container compiles and packages the application in the running OS,
+and a different OS: each container compiles and packages the application in the running OS,
 in order to avoid startup problems in production.
 
 With codename, at the end of the process, you obtain a package in the form `myapp-1.2.1~xenial_amd64.deb`.
-Also the control script in deb file is packaged with the correct version like `1.2.1~xenial`.
-At this point, it easier to manage the packages loaded in a repository, because they are versioned also by distribution.
+Also the control script in the deb file is packaged with the correct version like `1.2.1~xenial`.
+At this point, it's easier to manage the packages loaded in a repository, because they are versioned also by distribution.
 
 ## Usage
 
