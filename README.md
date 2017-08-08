@@ -121,8 +121,8 @@ A typical use case can be an environment where you have different Docker contain
 with different OS, each container compiles and packages the application in the running OS,
 in order to avoid startup problems in production.
 
-With codename, at the end of the process, you obtain a package in the form "myapp-1.2.1\~xenial_amd64.deb".
-Also the control script in deb file is packaged with the correct version like 1.2.1\~xenial.
+With codename, at the end of the process, you obtain a package in the form `myapp-1.2.1~xenial_amd64.deb`.
+Also the control script in deb file is packaged with the correct version like `1.2.1~xenial`.
 At this point, it easier to manage the packages loaded in a repository, because they are versioned also by distribution.
 
 ## Usage
